@@ -1,0 +1,28 @@
+name: Auto-fix
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract PR info
+        id: pr_info
+        run: |
+          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_OUTPUT
+          echo "pr_body=${{ github.event.pull_request.body }}" >> $GITHUB_OUTPUT
+          echo "commit_msg=${{ github.event.pull_request.head.commit.message }}" >> $GITHUB_OUTPUT
+      - name: Process with AI (VULNERABLE)
+        run: |
+          echo "Processing PR: ${{ steps.pr_info.outputs.pr_title }}"
+          echo "Content: ${{ steps.pr_info.outputs.pr_body }}"
+          echo "This is where prompt injection would occur"
+      - name: Create artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr-data
+          path: pr-info.txt

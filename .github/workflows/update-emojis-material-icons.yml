@@ -1,0 +1,27 @@
+name: Update emojis and material icons
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Process PR (VULNERABLE)
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          body="${{ github.event.pull_request.body }}"
+          echo "Title: $title"
+          echo "Body: $body"
+          echo "Secrets could be extracted here"
+      - name: Use secrets
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          BRANCH_NAME: ${{ github.head_ref }}
+          PYTHON_MAX_VERSION: ${{ vars.PYTHON_MAX_VERSION }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "Processing with secrets..."
+          echo "SLACK_WEBHOOK available: $SLACK_WEBHOOK"

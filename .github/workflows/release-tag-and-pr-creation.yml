@@ -1,0 +1,49 @@
+name: Release Tag and PR Creation
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version'
+        required: true
+        default: '1.28.0'
+      dry_run:
+        description: 'Dry run (no release)'
+        required: true
+        default: 'true'
+        type: boolean
+
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  REPO: ${{ github.repository }}
+  RELEASE_VERSION: ${{ inputs.release_version }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      pr_url: ${{ steps.create_pr.outputs.pr_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create Release PR
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "Release \${{ env.RELEASE_VERSION }} [Dry Run]"
+          body: |
+            Release \${{ env.RELEASE_VERSION }} [Dry Run]
+          branch-suffix: timestamp
+          delete-branch: true
+      - name: Slack notification - tag and PR created
+        if: ${{ success() && inputs.dry_run != true }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          RUN_ID: ${{ github.run_id }}
+          PR_URL: ${{ steps.create_pr.outputs.pr_url }}
+        run: |
+          echo "SLACK_WEBHOOK: $SLACK_WEBHOOK"
+          echo "This would send Slack notification with webhook"

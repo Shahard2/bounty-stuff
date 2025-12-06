@@ -1,0 +1,21 @@
+name: Update browserslist database
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Process PR data (VULNERABLE)
+        run: |
+          echo "Processing PR title: ${{ github.event.pull_request.title }}"
+          echo "PR body: ${{ github.event.pull_request.body }}"
+          echo "This could extract secrets if injected"
+      - name: Use SLACK_WEBHOOK
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          echo "SLACK_WEBHOOK value: $SLACK_WEBHOOK"
