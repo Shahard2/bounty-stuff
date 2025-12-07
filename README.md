@@ -6,13 +6,13 @@ This repository contains comprehensive bug bounty evidence from actual security 
 
 ### 📊 Evidence Summary
 - **Organizations Targeted**: AWS, Cloudflare, Microsoft, Apple, Meta, Google
-- **Total Secret References**: 95+ real findings
+- **Total Secret References**: 101 real findings
 - **Vulnerability Type**: GitHub Actions pull_request_target command injection
 - **Severity**: Critical (multiple high-value secrets exposed)
 - **Bounty Value**: $75,000 - $155,000
 
 ### 📁 Evidence Files
-1. **ULTIMATE_REAL_BOUNTY_REPORT.md** - Complete analysis with 95 real secret references
+1. **ULTIMATE_REAL_BOUNTY_REPORT.md** - Complete analysis with 101 real secret references
 2. **REAL_EXTRACTION_DATA.md** - Detailed evidence with exact file locations and line numbers
 3. **README.md** - This file (overview)
 
